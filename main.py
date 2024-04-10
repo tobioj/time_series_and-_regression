@@ -44,7 +44,7 @@ def app():
     yr_built= st.number_input('Year built')
     yr_renovated = st.number_input('Year renovated')
     floors =  st.slider("No_Floor", min_value = 1, max_value = 10, step = 1)
-  
+    bias = 0
     # set your values
     df_from_input = pd.DataFrame([{
     'bedrooms': bedrooms, 
@@ -58,7 +58,8 @@ def app():
     'sqft_above': sqft_above,
     'sqft_basement': sqft_basement, 
     'yr_built': yr_built, 
-    'yr_renovated': yr_renovated
+    'yr_renovated': yr_renovated,
+    'bias': bias
   }])
 
     #price = model.predict(df_from_input)

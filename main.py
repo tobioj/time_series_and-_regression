@@ -20,30 +20,31 @@ X = np.c_[X, np.ones(X.shape[0])]
 
 # Split data into training and testing sets (if needed)
 # Then train the model
-model = LinearRegression()
+model = LinearRegression(learning_rate=0.01, n_iterations=0)
 model.fit(X, y)
 
 
 # Define the app
 def app():
     st.title('House predicting app')
-    st.write('input your house details')
+    st.write('Project by Oluwatobi, Doug and Joe')
+    st.write('Input your house details')
     
     # Create input widgets for each feature
     bedrooms = st.slider("No_Bedroom", min_value = 1, max_value = 30, step = 1)
     bathrooms = st.slider("No_Bathroom", min_value = 1, max_value = 30, step = 1)
     sqft_living = st.number_input('Square feet living')
-    sqft_lot = st.number_input('square feet lot')
-    waterfront = st.selectbox("waterfront (1 is Yes 0 is No)", options =(data['waterfront'].unique()))
-    view = st.selectbox("production year", options=(list( data['Prod. year'].unique())))
-    condition = st.slider('condition (0 is worst, 1 is bad, 2 is fair, 3 is good, 4 is great )', 
+    sqft_lot = st.number_input('Square feet lot')
+    waterfront = st.slider("No_waterfront", min_value = 0, max_value = 5, step = 1)
+    view = st.slider("No_View", min_value = 0, max_value = 10, step = 1)
+    condition = st.slider('Condition (0 is worst, 1 is bad, 2 is fair, 3 is good, 4 is great )', 
     min_value=1, max_value=4, step=1)
-    sqft_above= st.number_input("square feet above")
-    sqft_basement=st.number_input("square feet of basement")
-    yr_built= st.number_input('year built')
-    yr_renovated = st.selectbox('year renovated', options=(list(data['yr_renovated'].unique())))
+    sqft_above= st.number_input("Square feet above")
+    sqft_basement=st.number_input("Square feet of basement")
+    yr_built= st.number_input('Year built')
+    yr_renovated = st.number_input('Year renovated')
     floors =  st.slider("No_Floor", min_value = 1, max_value = 10, step = 1)
-    bias = 0
+  
     # set your values
     df_from_input = pd.DataFrame([{
     'bedrooms': bedrooms, 
@@ -57,8 +58,7 @@ def app():
     'sqft_above': sqft_above,
     'sqft_basement': sqft_basement, 
     'yr_built': yr_built, 
-    'yr_renovated': yr_renovated,
-    'bias': bias
+    'yr_renovated': yr_renovated
   }])
 
     #price = model.predict(df_from_input)
@@ -67,8 +67,8 @@ def app():
     # Display the predicted price to the user
     if st.button('Submit'):
         price = model.predict(df_from_input)
-        st.success(f'your policy is {price[0]:,.2f} dollar.')
+        st.success(f'The price for this house is {price[0]:,.2f} dollar.')
     
-if __name__ == '_main_':
+if __name__ == '__main__':
     app()
     

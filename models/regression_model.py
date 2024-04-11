@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 class LinearRegression:
-    def __init__(self, learning_rate=0.01, n_iterations=1):
+    def __init__(self, learning_rate=0.01, n_iterations=1000):
         self.learning_rate = learning_rate
         self.n_iterations = n_iterations
         self.weights = None
@@ -26,4 +26,4 @@ class LinearRegression:
             self.bias -= self.learning_rate * db
 
     def predict(self, X):
-        return (np.dot(X, self.weights) + self.bias)
+        return (np.dot(X, self.weights) + self.bias)/100

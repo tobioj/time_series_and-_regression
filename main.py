@@ -20,7 +20,7 @@ X = np.c_[X, np.ones(X.shape[0])]
 
 # Split data into training and testing sets (if needed)
 # Then train the model
-model = LinearRegression(learning_rate=0.01, n_iterations=0)
+model = LinearRegression(learning_rate=0.01, n_iterations=10)
 model.fit(X, y)
 
 
